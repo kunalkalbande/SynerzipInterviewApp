@@ -9,7 +9,7 @@ namespace SynerzipInterviewApp.Models
         }
 
         public DbSet<Interview> Interviews { get; set; }
-
+        public DbSet<ContentBlock> ContentBlocks { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 

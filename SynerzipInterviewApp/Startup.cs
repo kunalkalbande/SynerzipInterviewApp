@@ -62,9 +62,11 @@ namespace SynerzipInterviewApp
 
             services.AddDbContext<ApplicationContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:SynerzipInterviewDB"]));
             services.Configure<LdapConfig>(Configuration.GetSection("Ldap"));
+            services.Configure<AppConfig>(Configuration.GetSection("ConnectionString"));
             services.AddScoped<IAuthenticationRepository, LdapAuthenticationManager>();
             services.AddScoped<IInterviewRepository, InterviewManager>();
-          
+            services.AddScoped<IContentBlockRepository, ContentBlockManager>();
+
 
             var tokenValidationParameters = new TokenValidationParameters
             {

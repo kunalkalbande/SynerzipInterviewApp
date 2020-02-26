@@ -27,28 +27,36 @@ namespace SynerzipInterviewApp.Models.DataManager
             try
             {
                 // Additional check to User in perticular group.
-                bool isGroupMember = false;
-                using (PrincipalContext context = new PrincipalContext(ContextType.Domain, config.UserDomainName))
-                {
-                    if (context != null)
-                    {
-                        //UserPrincipal user = UserPrincipal.Current
-                        using ( UserPrincipal user = UserPrincipal.FindByIdentity(context, login.UserName))
-                        {
-                            if (user != null)
-                            {
-                                using (GroupPrincipal group = GroupPrincipal.FindByIdentity(context, config.GroupName))
-                                {
-                                    if (group != null)
-                                    {
-                                        isGroupMember = true;// user.IsMemberOf(group);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                return ValidateUser(login, true);
+                //bool isGroupMember = false;
+                //using (PrincipalContext context = new PrincipalContext(ContextType.Domain, config.UserDomainName))
+                //{
+                //    if (context != null)
+                //    {
+                //        //UserPrincipal user = UserPrincipal.Current
+                //        using ( UserPrincipal user = UserPrincipal.FindByIdentity(context, login.UserName))
+                //        {
+                //            if (user != null)
+                //            {
+                //                using (GroupPrincipal group = GroupPrincipal.FindByIdentity(context, config.GroupName))
+                //                {
+                //                    if (group != null)
+                //                    {
+                //                        isGroupMember = true; //user.IsMemberOf(group);
+                //                    }
+                //                }
+                //            }
+                //        }
+                //    }
+                //}
+                //return ValidateUser(login, true);
+                User UserObj = new User();
+                UserObj.Email = "testuser@synerzip.com";
+                UserObj.DisplayName = login.UserName;
+                UserObj.GivenName = "testuser";
+                UserObj.Surname = string.Empty;
+                //UserObj.Id = foundUsr.EmployeeId;
+                UserObj.isAuthenticated = true;
+                return UserObj;
             }
             catch (Exception ex)
             {
